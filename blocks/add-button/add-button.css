@@ -1,0 +1,20 @@
+.add-button{
+  outline: none; /* Для синий ободки */
+  background: transparent;
+  display: block;
+  border: 1px solid #fff;
+  margin-left: auto;
+  width: 150px;
+  height: 50px;
+}
+
+@media screen and (max-width: 700px) {
+  .add-button{
+    margin: 36px auto 0;
+    width: 282px;
+  }
+}
+
+.add-button:hover{
+  cursor: pointer;
+}

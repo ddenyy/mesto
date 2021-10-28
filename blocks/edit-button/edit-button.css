@@ -1,0 +1,25 @@
+.edit-button {
+  outline: none; /* Для синий ободки */
+  background: transparent;
+  display: block;
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  border: 1px solid #ffffff;
+  margin-top: 8px;
+}
+
+@media screen and (max-width: 372px) {
+  .edit-button {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+
+.edit-button:hover{
+  cursor: pointer;
+}
