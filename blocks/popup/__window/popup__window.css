@@ -1,4 +1,4 @@
-.popup__window{
+.popup__window {
   position: relative;
   border-radius: 10px;
   background-color: #fff;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 460px) {
-  .popup__window{
+  .popup__window {
     margin-left: 6vw;
     margin-right: 6vw;
     height: 322px;

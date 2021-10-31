@@ -1,4 +1,4 @@
-.heart-button{
+.heart-button {
   outline: none;
   background: transparent;
   display: block;
@@ -11,8 +11,7 @@
   background-position: center;
 }
 
-
-.heart-button:hover{
+.heart-button:hover {
   cursor: pointer;
   opacity: 0.5;
   transition: opacity 0.3s linear;

@@ -1,6 +1,6 @@
-.profile__name{
+.profile__name {
   display: flex;
   flex-direction: row;
-  margin-bottom: 16px;
-  align-items:center;
+  gap: 18px;
+  align-items: center;
 }

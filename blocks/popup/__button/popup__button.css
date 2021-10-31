@@ -1,4 +1,4 @@
-.popup__button{
+.popup__button {
   outline: none; /* Для синий ободки */
   background: transparent;
   display: block;
@@ -7,18 +7,19 @@
   min-height: 46px;
   max-height: 50px;
   background-color: #000;
+  color: #fff;
   border: 0;
   margin: 0;
   padding: 0;
 }
 
 @media screen and (max-width: 320px) {
-  .popup__button{
+  .popup__button {
     height: 46px;
   }
 }
 
-.popup__button:hover{
+.popup__button:hover {
   opacity: 0.8;
   transition: opacity 0.3s linear;
   cursor: pointer;

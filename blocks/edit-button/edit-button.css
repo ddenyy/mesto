@@ -1,5 +1,5 @@
 .edit-button {
-  outline: none; /* Для синий ободки */
+  outline: none;
   background: transparent;
   display: block;
   width: 24px;
@@ -19,11 +19,11 @@
   }
 }
 
-.edit-button:hover{
+.edit-button:hover {
   opacity: 0.6;
   transition: opacity 0.3s linear;
 }
 
-.edit-button:hover{
+.edit-button:hover {
   cursor: pointer;
 }

@@ -4,17 +4,19 @@
   font-style: normal;
   font-weight: 500;
   width: fit-content;
+  max-width: 300px;
   margin: 0;
   margin-block-start: 0;
   margin-block-end: 0;
-  margin-right: 18px;
+  margin-right: 0;
   font-size: 42px;
   line-height: 48px;
+  min-height: 39px;
+  height: auto;
 }
 
-
 @media screen and (max-width: 372px) {
-  .profile__username{
+  .profile__username {
     font-size: 27px;
     line-height: 33px;
   }

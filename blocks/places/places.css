@@ -1,4 +1,6 @@
 .places {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-style: normal;
   display: grid;
   grid-template-columns: repeat(3, minmax(200px, 282px));
   row-gap: 20px;
@@ -10,5 +12,11 @@
 @media screen and (max-width: 700px) {
   .places {
     grid-template-columns: repeat(auto-fit, 282px);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .places{
+    gap: 20px;
   }
 }
