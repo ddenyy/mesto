@@ -1,11 +1,11 @@
-.popup__item_description {
+.popup__username {
   padding: 0;
-  color: #000000;
-  border: 0;
   margin: 0;
+  color: #000000;
+  border: none;
   text-decoration: none;
   outline: none;
-  max-width: 358px;
+  max-width: 350px;
   width: 100%;
   text-overflow: ellipsis;
   font-size: 14px;
@@ -15,11 +15,11 @@
   padding-bottom: 13px;
 }
 
-.popup__item_description:active {
+.popup__username:active {
   border-bottom: 1px solid #000;
 }
 
-.popup__item_description:focus {
+.popup__username:focus {
   border-bottom: 1px solid #000;
 }
 
