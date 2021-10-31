@@ -7,7 +7,7 @@
       name="keywords"
       content="html, css, grid, flex, frontend, js, mesto, адаптивная вёрстка, Яндекс Практикум"
     />
-    <meta name="author" content="Денис Осипов!" />
+    <meta name="author" content="Денис Осипов" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="pages/index.css" />
     <title>Mesto</title>
@@ -87,7 +87,28 @@
           </article>
         </section>
       </main>
-      <footer class="footer page__footer section"></footer>
+      <footer class="footer page__footer section">
+        <p class="footer__text">&copy; 2021 Mesto Russia</p>
+      </footer>
+      <div class="popup hidden">
+        <section class="popup__window">
+          <button class="popup__button-exit"></button>
+          <form class="popup__content">
+            <label class="popup__title">Редактировать профиль</label>
+            <fieldset class="popup__contact-info">
+              <div class="popup__item">
+                <input type='text' class="popup__item_username" value="Жак-Ив Кусто">
+              </div>
+              <div class="popup__item">
+                <input type='text' class="popup__item_description" value="Исследователь океана">
+              </div>
+            </fieldset>
+            <button class="popup__button">
+              <p class="popup__text">Сохранить</p>
+            </button>
+          </form>
+        </section>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>

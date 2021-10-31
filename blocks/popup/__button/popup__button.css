@@ -1,0 +1,19 @@
+.popup__button{
+  outline: none; /* Для синий ободки */
+  background: transparent;
+  display: block;
+  border: 1px solid #fff;
+  width: 100%;
+  min-height: 46px;
+  max-height: 50px;
+  background-color: #000;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.popup__button:hover{
+  opacity: 0.8;
+  transition: opacity 0.3s linear;
+  cursor: pointer;
+}
