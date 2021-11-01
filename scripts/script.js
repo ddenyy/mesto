@@ -5,24 +5,20 @@ let nameInput = document.querySelector(".popup__username"); // Воспольз�
 
 let jobInput = document.querySelector(".popup__description"); // Воспользуйтесь инструментом .querySelector()
 
+let profileName = document.querySelector(".profile__username"); // Выберите элементы, куда должны быть вставлены значения полей
+
+let profileDescription = document.querySelector(".profile__description");
+
+
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formSubmitHandler(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   // Так мы можем определить свою логику отправки.
   // О том, как это делать, расскажем позже.
+  profileName.textContent = nameInput.value;
 
-  let textJobInput = jobInput.value; // Получите значение полей jobInput и nameInput из свойства value
-
-  let textNameInput = nameInput.value;
-
-  let profileName = document.querySelector(".profile__username"); // Выберите элементы, куда должны быть вставлены значения полей
-
-  let profileDescription = document.querySelector(".profile__description");
-
-  profileName.textContent = textNameInput;
-
-  profileDescription.textContent = textJobInput;
+  profileDescription.textContent = jobInput.value;
 
   // Вставьте новые значения с помощью textContent
 }
@@ -39,6 +35,8 @@ const popupSaveProfileButton = document.querySelector(".popup__button");
 
 function openformElement() {
   formElement.classList.remove("hidden");
+  nameInput.value = profileName.textContent
+  jobInput.value = profileDescription.textContent
 }
 
 function closeformElement() {
@@ -49,4 +47,6 @@ popupEditProfileButton.addEventListener("click", openformElement);
 
 popupCloseProfileButton.addEventListener("click", closeformElement);
 
-popupSaveProfileButton.addEventListener("click", closeformElement);
+popupSaveProfileButton.addEventListener("click", closeformElement)
+
+
