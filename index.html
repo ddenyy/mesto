@@ -15,35 +15,25 @@
   <body class="page">
     <div class="page__container">
       <header class="header page__header section">
-        <div class="logo header__logo">
-          <img class="logo__image" src="images/header_logo.svg" alt="Место" />
-        </div>
+        <div class="header__image"></div>
       </header>
       <main class="content page__content">
         <section class="profile content__profile section">
-          <div class="avatar profile__avatar">
-            <img
-              class="avatar__image"
-              src="images/profile_avatar.png"
-              alt="Жак-Ив Кусто"
-            />
-          </div>
+          <img
+            class="profile__image"
+            src="images/profile_avatar.png"
+            alt="аватар"
+          />
           <div class="profile__info">
-            <div class="profile__name">
-              <h2 class="profile__username">Жак-Ив Кусто</h2>
-              <button type="button" class="edit-button">
-                <img
-                  class="edit-button__pen"
-                  src="images/pen.svg"
-                  alt="ручка"
-                />
-              </button>
-            </div>
-            <p class="profile__description">Исследователь океана</p>
+            <h1 class="profile__username">Жак-Ив Кусто</h1>
+            <button
+              aria-label="edit"
+              type="button"
+              class="profile__edit-button"
+            ></button>
+            <p class="profile__job">Исследователь океана</p>
           </div>
-          <button type="button" class="add-button">
-            <img src="images/plus.svg" class="add-button__plus" alt="плюс" />
-          </button>
+          <button type="button" class="profile__add-button"></button>
         </section>
         <section class="places page__places section">
           <article class="place places__place">
@@ -53,40 +43,40 @@
               alt="старый храм"
             />
             <div class="place__item">
-              <p class="place__title">Карачаевск</p>
-              <button class="heart-button"></button>
+              <h2 class="place__title">Карачаевск</h2>
+              <button type="button" class="place__heart-button"></button>
             </div>
           </article>
           <article class="place places__place">
             <img
               class="place__image"
-              src="images/elbrus.png"
+              src="images/elbrus.jpg"
               alt="Гора Эльбрус"
             />
             <div class="place__item">
-              <p class="place__title">Гора Эльбрус</p>
-              <button class="heart-button"></button>
+              <h2 class="place__title">Гора Эльбрус</h2>
+              <button type="button" class="place__heart-button"></button>
             </div>
           </article>
           <article class="place places__place">
-            <img class="place__image" src="images/Dombai.png" alt="Домбай" />
+            <img class="place__image" src="images/Dombai.jpg" alt="Домбай" />
             <div class="place__item">
-              <p class="place__title">Домбай</p>
-              <button class="heart-button"></button>
+              <h2 class="place__title">Домбай</h2>
+              <button type="button" class="place__heart-button"></button>
             </div>
           </article>
           <article class="place places__place">
-            <img class="place__image" src="images/elbrus.png" alt="Эльбрус" />
+            <img class="place__image" src="images/elbrus.jpg" alt="Эльбрус" />
             <div class="place__item">
-              <p class="place__title">Гора Эльбрус</p>
-              <button class="heart-button"></button>
+              <h2 class="place__title">Гора Эльбрус</h2>
+              <button type="button" class="place__heart-button"></button>
             </div>
           </article>
           <article class="place places__place">
-            <img class="place__image" src="images/Dombai.png" alt="Домбай" />
+            <img class="place__image" src="images/Dombai.jpg" alt="Домбай" />
             <div class="place__item">
-              <p class="place__title">Домбай</p>
-              <button class="heart-button"></button>
+              <h2 class="place__title">Домбай</h2>
+              <button type="button" class="place__heart-button"></button>
             </div>
           </article>
           <article class="place places__place">
@@ -96,8 +86,8 @@
               alt="старый храм"
             />
             <div class="place__item">
-              <p class="place__title">Карачаево-Ч...</p>
-              <button class="heart-button"></button>
+              <h2 class="place__title">Карачаево-Ч...</h2>
+              <button type="button" class="place__heart-button"></button>
             </div>
           </article>
         </section>
@@ -105,30 +95,32 @@
       <footer class="footer page__footer section">
         <p class="footer__text">&copy; 2021 Mesto Russia</p>
       </footer>
-      <div class="popup hidden">
-        <section class="popup__window">
+      <div class="popup">
+        <div class="popup__window">
           <button type="button" class="popup__button-exit"></button>
-          <form class="popup__content">
-            <label class="popup__title">Редактировать профиль</label>
+          <form name="edit-Profile-form" class="popup__content">
+            <h2 class="popup__title">Редактировать профиль</h2>
             <fieldset class="popup__contact-info">
-              <div class="popup__item">
-                <input
-                  type="text"
-                  class="popup__username"
-                  value="Жак-Ив Кусто"
-                />
-              </div>
-              <div class="popup__item">
-                <input
-                  type="text"
-                  class="popup__description"
-                  value="Исследователь океана"
-                />
-              </div>
+              <input
+                name="Username"
+                type="text"
+                class="popup__input"
+                value=""
+                id="popupEditUsername"
+                autocomplete="off"
+              />
+              <input
+                name="userJob"
+                type="text"
+                class="popup__input"
+                value=""
+                id="popupEditJob"
+                autocomplete="off"
+              />
             </fieldset>
             <button type="submit" class="popup__button">Сохранить</button>
           </form>
-        </section>
+        </div>
       </div>
     </div>
     <script src="scripts/script.js"></script>

@@ -4,3 +4,11 @@
   gap: 18px;
   align-items: center;
 }
+
+@media screen and (max-width: 400px) {
+  .profile__name{
+    gap: 10px;
+    margin: 0 auto;
+    margin-bottom: 14px;
+  }
+}

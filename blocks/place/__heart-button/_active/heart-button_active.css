@@ -1,4 +1,4 @@
-.heart-button_active{
+.place__heart-button_active {
   outline: none;
   background: transparent;
   display: block;
@@ -11,7 +11,6 @@
   background-position: center;
 }
 
-
-.heart-button_active:hover{
+.place__heart-button_active:hover {
   cursor: pointer;
 }

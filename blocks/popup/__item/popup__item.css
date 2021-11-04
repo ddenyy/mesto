@@ -1,9 +1,0 @@
-.popup__item {
-  border: 0;
-  box-sizing: border-box;
-  height: 27px;
-}
-
-.popup__item:last-child {
-  margin-top: 30px;
-}

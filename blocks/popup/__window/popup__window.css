@@ -2,7 +2,6 @@
   position: relative;
   border-radius: 10px;
   background-color: #fff;
-  height: 330px;
   max-width: 430px;
   width: 100%;
 }
@@ -11,6 +10,5 @@
   .popup__window {
     margin-left: 6vw;
     margin-right: 6vw;
-    height: 322px;
   }
 }

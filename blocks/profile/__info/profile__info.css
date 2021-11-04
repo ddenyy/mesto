@@ -1,4 +1,16 @@
 .profile__info {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  row-gap: 11px;
+  column-gap: 18px;
+  grid-template-areas:
+  "username edit-button"
+  "job job ";
+  align-items: center;
+}
+
+@media screen and (max-width: 400px) {
+  .profile__info{
+    row-gap: 10px;
+    column-gap: 10px;
+  }
 }
