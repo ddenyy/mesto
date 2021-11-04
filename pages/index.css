@@ -26,16 +26,10 @@
 @import url(../blocks/content/__profile/content__profile.css);
 
 
-/*блок section*/
-@import url(../blocks/section/section.css);
-
-
 /*блок profile*/
 @import url(../blocks/profile/profile.css);
 /*элемент info*/
 @import url(../blocks/profile/__info/profile__info.css);
-/*элемент name*/
-@import url(../blocks/profile/__name/profile__name.css);
 /*элемент username*/
 @import url(../blocks/profile/__username/profile__username.css);
 /*элемент job*/
@@ -50,8 +44,6 @@
 
 /*блок places*/
 @import url(../blocks/places/places.css);
-/*элемент place*/
-@import url(../blocks/places/__place/places__place.css);
 
 
 /*блок place*/

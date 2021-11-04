@@ -15,7 +15,6 @@
   white-space: nowrap;
   overflow: hidden;
   grid-area: username;
-
 }
 
 @media screen and (max-width: 372px) {

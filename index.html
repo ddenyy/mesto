@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="проектная работа Mesto" />
-    <meta
-      name="keywords"
-      content="html, css, grid, flex, frontend, js, mesto, адаптивная вёрстка, Яндекс Практикум"
-    />
+    <meta name="keywords" content="html, css, grid, flex, frontend, js, mesto, адаптивная вёрстка, Яндекс Практикум"/>
     <meta name="author" content="Денис Осипов" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="pages/index.css" />
@@ -14,77 +11,57 @@
   </head>
   <body class="page">
     <div class="page__container">
-      <header class="header page__header section">
+      <header class="header page__header">
         <div class="header__image"></div>
       </header>
       <main class="content page__content">
-        <section class="profile content__profile section">
-          <img
-            class="profile__image"
-            src="images/profile_avatar.png"
-            alt="аватар"
-          />
+        <section class="profile content__profile">
+          <img class="profile__image" src="images/profile_avatar.png" alt="аватар"/>
           <div class="profile__info">
             <h1 class="profile__username">Жак-Ив Кусто</h1>
-            <button
-              aria-label="edit"
-              type="button"
-              class="profile__edit-button"
-            ></button>
+            <button aria-label="edit" type="button" class="profile__edit-button"></button>
             <p class="profile__job">Исследователь океана</p>
           </div>
           <button type="button" class="profile__add-button"></button>
         </section>
-        <section class="places page__places section">
-          <article class="place places__place">
-            <img
-              class="place__image"
-              src="images/KARACHA_kirill-pershin.jpg"
-              alt="старый храм"
-            />
+        <section class="places page__places">
+          <article class="place">
+            <img class="place__image" src="images/KARACHA_kirill-pershin.jpg" alt="старый храм"/>
             <div class="place__item">
               <h2 class="place__title">Карачаевск</h2>
               <button type="button" class="place__heart-button"></button>
             </div>
           </article>
-          <article class="place places__place">
-            <img
-              class="place__image"
-              src="images/elbrus.jpg"
-              alt="Гора Эльбрус"
-            />
+          <article class="place">
+            <img class="place__image" src="images/elbrus.jpg" alt="Гора Эльбрус"/>
             <div class="place__item">
               <h2 class="place__title">Гора Эльбрус</h2>
               <button type="button" class="place__heart-button"></button>
             </div>
           </article>
-          <article class="place places__place">
-            <img class="place__image" src="images/Dombai.jpg" alt="Домбай" />
+          <article class="place">
+            <img class="place__image" src="images/Dombai.jpg" alt="Домбай"/>
             <div class="place__item">
               <h2 class="place__title">Домбай</h2>
               <button type="button" class="place__heart-button"></button>
             </div>
           </article>
-          <article class="place places__place">
-            <img class="place__image" src="images/elbrus.jpg" alt="Эльбрус" />
+          <article class="place">
+            <img class="place__image" src="images/elbrus.jpg" alt="Эльбрус"/>
             <div class="place__item">
               <h2 class="place__title">Гора Эльбрус</h2>
               <button type="button" class="place__heart-button"></button>
             </div>
           </article>
-          <article class="place places__place">
-            <img class="place__image" src="images/Dombai.jpg" alt="Домбай" />
+          <article class="place">
+            <img class="place__image" src="images/Dombai.jpg" alt="Домбай"/>
             <div class="place__item">
               <h2 class="place__title">Домбай</h2>
               <button type="button" class="place__heart-button"></button>
             </div>
           </article>
-          <article class="place places__place">
-            <img
-              class="place__image"
-              src="images/KARACHA_kirill-pershin.jpg"
-              alt="старый храм"
-            />
+          <article class="place">
+            <img class="place__image" src="images/KARACHA_kirill-pershin.jpg" alt="старый храм"/>
             <div class="place__item">
               <h2 class="place__title">Карачаево-Ч...</h2>
               <button type="button" class="place__heart-button"></button>
@@ -92,7 +69,7 @@
           </article>
         </section>
       </main>
-      <footer class="footer page__footer section">
+      <footer class="footer page__footer">
         <p class="footer__text">&copy; 2021 Mesto Russia</p>
       </footer>
       <div class="popup">
@@ -101,22 +78,8 @@
           <form name="edit-Profile-form" class="popup__content">
             <h2 class="popup__title">Редактировать профиль</h2>
             <fieldset class="popup__contact-info">
-              <input
-                name="Username"
-                type="text"
-                class="popup__input"
-                value=""
-                id="popupEditUsername"
-                autocomplete="off"
-              />
-              <input
-                name="userJob"
-                type="text"
-                class="popup__input"
-                value=""
-                id="popupEditJob"
-                autocomplete="off"
-              />
+              <input name="User-name" type="text" class="popup__input" value="" id="popup-Edit-Username" autocomplete="off"/>
+              <input name="user-Job" type="text" class="popup__input" value="" id="popup-Edit-Job" autocomplete="off"/>
             </fieldset>
             <button type="submit" class="popup__button">Сохранить</button>
           </form>
