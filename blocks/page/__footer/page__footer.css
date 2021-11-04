@@ -7,5 +7,6 @@
 @media screen and (max-width: 400px) {
   .page__footer {
     max-width: 282px;
+    padding-bottom: 36px;
   }
 }
