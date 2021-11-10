@@ -87,4 +87,14 @@
 
 
 
+/*блок попапа с открытием фото на полноэкран*/
+@import url(../blocks/popup/__picture/popup__picture.css);
+/*элемент фото*/
+@import url(../blocks/popup/__picture/popup__picture.css);
+/*элемент подпись к фото*/
+@import url(../blocks/popup/__picture-name/popup__picture-name.css);
+
+
+
+
 

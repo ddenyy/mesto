@@ -25,7 +25,7 @@
           <button type="button" class="profile__add-button"></button>
         </section>
         <section class="places page__places">
-          <article class="place">
+          <!--<article class="place">
             <img class="place__image" src="images/KARACHA_kirill-pershin.jpg" alt="старый храм"/>
             <div class="place__item">
               <h2 class="place__title">Карачаевск</h2>
@@ -66,24 +66,54 @@
               <h2 class="place__title">Карачаево-Ч...</h2>
               <button type="button" class="place__heart-button"></button>
             </div>
-          </article>
+            </article>-->
         </section>
       </main>
       <footer class="footer page__footer">
         <p class="footer__text">&copy; 2021 Mesto Russia</p>
       </footer>
-      <div class="popup">
+
+      <template id="place-template">
+        <article class="place">
+          <img class="place__image" src="images/KARACHA_kirill-pershin.jpg" alt="старый храм"/>
+          <div class="place__item">
+            <h2 class="place__title">Карачаево-Ч...</h2>
+            <button type="button" class="place__heart-button"></button>
+          </div>
+        </article>
+      </template>
+
+      <div class="popup popup_edit-profile">
         <div class="popup__window">
-          <button type="button" class="popup__button-exit"></button>
+          <button type="button" class="popup__button-exit popup__button-exit_edit-form"></button>
           <form name="edit-Profile-form" class="popup__content">
             <h2 class="popup__title">Редактировать профиль</h2>
             <fieldset class="popup__contact-info">
               <input name="user-name" type="text" class="popup__input" value="" id="popup-edit-username" autocomplete="off"/>
               <input name="user-job" type="text" class="popup__input" value="" id="popup-edit-job" autocomplete="off"/>
             </fieldset>
-            <button type="submit" class="popup__button">Сохранить</button>
+            <button type="submit" class="popup__button popup__button_update-profile">Сохранить</button>
           </form>
         </div>
+      </div>
+      <div class="popup popup_add-picture">
+        <div class="popup__window">
+          <button type="button" class="popup__button-exit popup__button-exit_add-picture-form"></button>
+          <form name="edit-Profile-form" class="popup__content">
+            <h2 class="popup__title">Новое место</h2>
+            <fieldset class="popup__contact-info">
+              <input name="picture-name" type="text" class="popup__input" value="" id="popup-picture-name" autocomplete="off" placeholder="Название" required/>
+              <input name="picture-link" type="text" class="popup__input" value="" id="popup-picture-link" autocomplete="off" placeholder="Ссылка на картинку" required/>
+            </fieldset>
+            <button type="submit" class="popup__button popup__button_create-card">Создать</button>
+          </form>
+        </div>
+      </div>
+      <div class="popup popup_open-picture">
+        <figure>
+          <img class="popup__picture" src="images/горный алтай проверка.png">
+          <figcaption class="popup__picture-name">Горный Алтай</figcaption>
+        </figure>
       </div>
     </div>
     <script src="scripts/script.js"></script>

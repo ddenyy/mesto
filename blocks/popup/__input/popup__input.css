@@ -29,7 +29,8 @@
 }
 
 ::placeholder {
-  color: #000;
+  color: #C4C4C4;
   font-size: 14px;
-  text-transform: uppercase;
+  line-height: 17px;
+
 }
