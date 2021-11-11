@@ -1,4 +1,5 @@
 .popup__picture{
+  position: relative;
   display: block;
   width: auto;
   height: 100%;

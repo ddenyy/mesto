@@ -48,12 +48,13 @@
 
 /*блок place*/
 @import url(../blocks/place/place.css);
+/*кнопка удаления*/
+@import url(../blocks/place/__button-delete/place__button-delete.css);
 /*элемент image*/
 @import url(../blocks/place/__image/place__image.css);
 /*элемент title*/
 @import url(../blocks/place/__title/place__title.css);
 @import url(../blocks/place/__item/place__item.css);
-
 /*элемент кнопка heart*/
 @import url(../blocks/place/__heart-button/heart-button.css);
 /*модификатор heart active*/
@@ -94,6 +95,9 @@
 /*элемент подпись к фото*/
 @import url(../blocks/popup/__picture-name/popup__picture-name.css);
 
+@import url(../blocks/popup/__window/_place/_picture/popup__window_place_picture.css);
+
+@import url(../blocks/popup/_picture/_full-screen/popup_picture_full-screen.css);
 
 
 
