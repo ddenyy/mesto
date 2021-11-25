@@ -63,47 +63,21 @@ popupCloseProfileButton.addEventListener("click", () => closePopup(popupEditProf
 //отправка popup EditProfile
 popupEditProfile.addEventListener("submit", submitFormEditProfile);
 
-const initialCards = [{
-  name: 'Тепло',
-  link: 'https://images.unsplash.com/photo-1636648207823-a09ef52fc496?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=464&q=80'
-},
-{
-  name: 'Сила',
-  link: 'https://images.unsplash.com/photo-1523825086357-39d9158d4ba8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80'
-},
-{
-  name: 'Мечта',
-  link: 'https://images.unsplash.com/photo-1636550880539-dbf8aca1bf71?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=385&q=80'
-},
-{
-  name: 'Спокойствие',
-  link: 'https://images.unsplash.com/photo-1636400397470-104101d3f4f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
-},
-{
-  name: 'Знание',
-  link: 'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1074&q=80'
-},
-{
-  name: 'Мир',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-}
-];
-
 initialCards.forEach((item) => {
-  return addCardPlace(item.name, item.link)
+  return addCardPlace(item)
 })
 
-function addCardPlace(name, link) {
-  const cardElement = createCard(name, link);
+function addCardPlace(cardInfo) {
+  const cardElement = createCard(cardInfo);
   placesContainer.prepend(cardElement);
 }
 
-function createCard(name, link) {
+function createCard(cardInfo) {
   const cardTemplate = document.querySelector("#place-template").content;
   const cardElement = cardTemplate.querySelector(".place").cloneNode(true);
-  cardElement.querySelector(".place__title").textContent = name;
-  cardElement.querySelector(".place__image").src = link;
-  cardElement.querySelector(".place__image").alt = name;
+  cardElement.querySelector(".place__title").textContent = cardInfo.name;
+  cardElement.querySelector(".place__image").src = cardInfo.link;
+  cardElement.querySelector(".place__image").alt = cardInfo.name;
   deletePlaceCard(cardElement);
   togglePlaceLike(cardElement);
   openPopupPicture(cardElement);
@@ -124,6 +98,18 @@ function openPopupPicture(element) {
 // слушатель на кнопку закрытия
 popupOpenPictureExitBth.addEventListener("click", () => {
   closePopup(popupOpenPicture);
+})
+
+
+// ф-ция открытия и закрытие всех попапов при клике на оверлей
+const popups = Array.from(document.querySelectorAll('.popup'))
+
+popups.forEach((popup) =>{
+  popup.addEventListener("click", (evt)=>{
+    if (evt.target === popup){
+      closePopup(popup)
+    }
+  })
 })
 
 
@@ -149,10 +135,19 @@ popupCloseAddPictureButton.addEventListener("click", () => closePopup(popupAddPi
 //функция отправки формы добавления карточки
 function SubmitformAddCard(evt) {
   evt.preventDefault();
-  addCardPlace(pictureNameInput.value, pictureLinkInput.value);
+  const nameInput = pictureNameInput.value;
+  const linkInput = pictureLinkInput.value;
+  let item = {
+    name: nameInput,
+    link: linkInput
+  }
+  addCardPlace(item);
   closePopup(popupAddPicture);
   pictureNameInput.value = "";
   pictureLinkInput.value = "";
 }
 
 popupAddPicture.addEventListener("submit", SubmitformAddCard)
+
+
+
