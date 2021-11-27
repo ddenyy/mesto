@@ -45,30 +45,38 @@
         <div class="popup popup_edit_profile">
             <div class="popup__window">
                 <button type="button" class="popup__button-exit popup__button-exit_place_edit-form"></button>
-                <form name="edit-Profile-form" class="popup__content">
+                <form id="form" name="edit-Profile-form" class="popup__content" novalidate>
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <fieldset class="popup__contact-info">
-                        <input name="user-name" type="text" class="popup__input" value="" id="popup-edit-username" autocomplete="off" required minlength="2" maxlength="40"/>
-                        <!--<span class="form__input-error popup-edit-username-error">Вы пропустили это поле</span>-->
-                        <input name="user-job" type="text" class="popup__input" value="" id="popup-edit-job" autocomplete="off" required minlength="2" maxlength="200"/>
-                        <!--<span class="form__input-error popup-edit-job-error">я ошибка</span>-->
+                        <div class="input-container">
+                          <input name="user-name" type="text" class="popup__input" value="" id="popup-edit-username" autocomplete="off" required minlength="2" maxlength="40"/>
+                          <span class="error-message popup-edit-username-error">test</span>
+                        </div>
+                        <div class="input-container">
+                          <input name="user-job" type="text" class="popup__input" value="" id="popup-edit-job" autocomplete="off" required minlength="2" maxlength="200"/>
+                          <span class="error-message popup-edit-job-error">test</span>
+                        </div>
                     </fieldset>
-                    <button type="submit" class="popup__button popup__button_update_profile">Сохранить</button>
+                    <button id="submit" type="submit" class="popup__button popup__button_update_profile">Сохранить</button>
                 </form>
             </div>
         </div>
-        <div class="popup popup_add_picture popup_opened">
+        <div class="popup popup_add_picture">
             <div class="popup__window">
                 <button type="button" class="popup__button-exit popup__button-exit_place_add-form"></button>
-                <form name="edit-Profile-form" class="popup__content">
+                <form id="form" name="add-card-form" class="popup__content">
                     <h2 class="popup__title">Новое место</h2>
                     <fieldset class="popup__contact-info">
-                        <input name="picture-name" type="text" class="popup__input" value="" id="popup-picture-name" autocomplete="off" placeholder="Название" required minlength="2" maxlength="30"/>
-                        <span class="form__input-error popup-picture-name-error">Вы пропустили это поле</span>
-                        <input name="picture-link" type="url" class="popup__input" value="" id="popup-picture-link" autocomplete="off" placeholder="Ссылка на картинку" required/>
-                        <span class="form__input-error popup-picture-link-error">я ошибка</span>
+                        <div class="input-container">
+                          <input name="picture-name" type="text" class="popup__input" value="" id="popup-picture-name" autocomplete="off" placeholder="Название" required minlength="2" maxlength="30"/>
+                          <span class="error-message popup-picture-name-error">test</span>
+                        </div>
+                        <div class="input-container">
+                          <input name="picture-link" type="url" class="popup__input" value="" id="popup-picture-link" autocomplete="off" placeholder="Ссылка на картинку" required/>
+                          <span class="error-message popup-picture-link-error">test</span>
+                        </div>
                     </fieldset>
-                    <button type="submit" class="popup__button popup__button_create_card popup__button_disabled">Создать</button>
+                    <button id="submit" type="submit" class="popup__button popup__button_create_card">Создать</button>
                 </form>
             </div>
         </div>

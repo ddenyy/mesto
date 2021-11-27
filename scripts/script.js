@@ -33,6 +33,7 @@ const popupAddPictureButton = document.querySelector(".profile__add-button");
 // блок places
 const placesContainer = document.querySelector(".places");
 
+
 // функция submit для popupEditProfile
 function submitFormEditProfile(evt) {
   evt.preventDefault();
@@ -51,11 +52,17 @@ function closePopup(popupElement) {
   popupElement.classList.remove("popup_opened");
 }
 
-// слушатель на кнопку открытия попапа
+// слушатель на кнопку открытия попапа редактирования профиля
 popupEditProfileButton.addEventListener("click", () => {
-  openPopup(popupEditProfile);
+  const formEditProfile = document.getElementsByName("edit-Profile-form")
+  const config = {
+    errorClass: "error-message_shown",
+    inputErrorClass: "popup__input_type_error"
+  };
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  checkInputValidity(formEditProfile[0], nameInput, config)
+  openPopup(popupEditProfile);
 });
 
 popupCloseProfileButton.addEventListener("click", () => closePopup(popupEditProfile));
@@ -100,9 +107,8 @@ popupOpenPictureExitBth.addEventListener("click", () => {
   closePopup(popupOpenPicture);
 })
 
-
 // ф-ция открытия и закрытие всех попапов при клике на оверлей
-const popups = Array.from(document.querySelectorAll('.popup'))
+const popups = Array.from(document.querySelectorAll('.popup'));
 
 popups.forEach((popup) =>{
   popup.addEventListener("click", (evt)=>{
@@ -110,8 +116,12 @@ popups.forEach((popup) =>{
       closePopup(popup)
     }
   })
-})
-
+  document.querySelector(".page__container").addEventListener("keydown", (evt) =>{
+    if (evt.keyCode === 27) {
+      closePopup(popup)
+    }
+  })
+});
 
 // функция удаления карточек
 function deletePlaceCard(cardElement) {
@@ -127,21 +137,27 @@ function togglePlaceLike(cardElement) {
   })
 }
 
-
 //открытие/закрытие попапа add picture
-popupAddPictureButton.addEventListener("click", () => openPopup(popupAddPicture));
-popupCloseAddPictureButton.addEventListener("click", () => closePopup(popupAddPicture));
+popupAddPictureButton.addEventListener("click", () => {
+  const formAddPicture = document.getElementsByName("add-card-form")
+  const inactiveButtonClass = "popup__button_disabled";
+  toggleButtonState(formAddPicture[0], popupCreateCardButton, inactiveButtonClass)
+  openPopup(popupAddPicture)
+});
+popupCloseAddPictureButton.addEventListener("click", () => {
+  closePopup(popupAddPicture)
+});
 
 //функция отправки формы добавления карточки
 function SubmitformAddCard(evt) {
   evt.preventDefault();
   const nameInput = pictureNameInput.value;
   const linkInput = pictureLinkInput.value;
-  let item = {
+  let inputs = {
     name: nameInput,
     link: linkInput
   }
-  addCardPlace(item);
+  addCardPlace(inputs);
   closePopup(popupAddPicture);
   pictureNameInput.value = "";
   pictureLinkInput.value = "";
@@ -149,5 +165,13 @@ function SubmitformAddCard(evt) {
 
 popupAddPicture.addEventListener("submit", SubmitformAddCard)
 
+enableValidation({
+  formSelector: "#form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: "#submit",
+  inactiveButtonClass: "popup__button_disabled",
+  errorClass:"error-message_shown",
+  inputErrorClass: "popup__input_type_error"
+});
 
 

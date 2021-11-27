@@ -136,7 +136,19 @@
 
 /*спан ошибки*/
 
-@import url(../blocks/popup/__input-error/form__input-error.css);
+@import url(../blocks/popup/error-message/error-message.css);
+
+/*спан ошибки показать*/
+
+@import url(../blocks/popup/error-message/_shown/error-message_shown.css);
+
+/*модификатор показать ошибку в инпуте*/
+
+@import url(../blocks/popup/__input/_type/_error/popup__input_type_error.css);
+
+/*блок для импута*/
+
+@import url(../blocks/popup/input-container/input-container.css);
 
 /*элемент title*/
 
