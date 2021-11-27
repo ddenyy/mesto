@@ -168,7 +168,7 @@ popupAddPicture.addEventListener("submit", SubmitformAddCard)
 enableValidation({
   formSelector: ".form",
   inputSelector: ".popup__input",
-  submitButtonSelector: "#submit",
+  submitButtonSelector: ".bth_submit",
   inactiveButtonClass: "popup__button_disabled",
   errorClass:"error-message_shown",
   inputErrorClass: "popup__input_type_error"
