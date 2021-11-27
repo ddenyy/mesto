@@ -166,7 +166,7 @@ function SubmitformAddCard(evt) {
 popupAddPicture.addEventListener("submit", SubmitformAddCard)
 
 enableValidation({
-  formSelector: "#form",
+  formSelector: ".form",
   inputSelector: ".popup__input",
   submitButtonSelector: "#submit",
   inactiveButtonClass: "popup__button_disabled",

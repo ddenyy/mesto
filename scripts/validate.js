@@ -36,7 +36,8 @@ const showInputError = (formElement, inputElement, errorMessage, { errorClass, i
 };
 
 const setEventListeners = (formElement, config) =>{
-  const {inputSelector,
+  const {
+   inputSelector,
    submitButtonSelector,
    inactiveButtonClass,
    errorClass,
