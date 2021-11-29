@@ -32,10 +32,18 @@ const popupEditProfileButton = document.querySelector(".profile__edit-button");
 const popupAddPictureButton = document.querySelector(".profile__add-button");
 // блок places
 const placesContainer = document.querySelector(".places");
+// вся страница
+const page = document.querySelector(".page__container");
+//массив всех попапов
+const popups = Array.from(document.querySelectorAll('.popup'));
+//изображение с карточки
+const placeImage = document.querySelector(".place__image");
+//подпись к изображению к карточки
+const placeTitle = document.querySelector(".place__title");
 
 
 // функция submit для popupEditProfile
-function submitFormEditProfile(evt) {
+const submitFormEditProfile = (evt) => {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
@@ -43,17 +51,23 @@ function submitFormEditProfile(evt) {
 }
 
 // функция открывает  попап
-function openPopup(popupElement) {
+const openPopup = (popupElement) => {
   popupElement.classList.add("popup_opened");
 }
 
 // функция закрывает попап
-function closePopup(popupElement) {
+const closePopup = (popupElement) => {
   popupElement.classList.remove("popup_opened");
 }
 
-// слушатель на кнопку открытия попапа редактирования профиля
-popupEditProfileButton.addEventListener("click", () => {
+//-----
+const setEscEditProfile = (evt) =>{
+  if (evt.key ==="Escape") {
+    closePopup(popupEditProfile)
+  }
+}
+
+const checkValidityEditProfile = () =>{
   const formEditProfile = document.getElementsByName("edit-Profile-form")
   const config = {
     errorClass: "error-message_shown",
@@ -62,24 +76,64 @@ popupEditProfileButton.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   checkInputValidity(formEditProfile[0], nameInput, config)
-  openPopup(popupEditProfile);
-});
-
-popupCloseProfileButton.addEventListener("click", () => closePopup(popupEditProfile));
-
-//отправка popup EditProfile
-popupEditProfile.addEventListener("submit", submitFormEditProfile);
-
-initialCards.forEach((item) => {
-  return addCardPlace(item)
-})
-
-function addCardPlace(cardInfo) {
-  const cardElement = createCard(cardInfo);
-  placesContainer.prepend(cardElement);
 }
 
-function createCard(cardInfo) {
+const openPopupEditProfile = () =>{
+  checkValidityEditProfile();
+  page.addEventListener("keydown", setEscEditProfile);
+  openPopup(popupEditProfile);
+}
+
+const closePopupEditProfile = () =>{
+  closePopup(popupEditProfile)
+  page.removeEventListener("keydown", setEscEditProfile);
+}
+//-----
+
+// функция удаления карточек
+const deletePlaceCard = (cardElement) => {
+  cardElement.querySelector(".place__button-delete").addEventListener("click", () => {
+    cardElement.remove();
+  })
+};
+
+// функция лайка
+const togglePlaceLike = (cardElement) => {
+  cardElement.querySelector(".place__heart-button").addEventListener("click", function (evt) {
+    evt.target.classList.toggle("place__heart-button_active");
+  })
+};
+
+const setEscPopupPicture = (evt) =>{
+  if (evt.key ==="Escape") {
+    closePopup(popupOpenPicture)
+  }
+};
+
+const fillPopupPicture = (picture, text) =>{
+  popupOpenPictureItem.src = picture.src;
+  popupOpenPictureItem.alt = text.textContent;
+  popupOpenPictureText.textContent = text.textContent;
+};
+
+function openPopupPicture(element) {
+  const picture = element.querySelector(".place__image");
+  const text = element.querySelector(".place__title");
+  picture.addEventListener("click", () => {
+    fillPopupPicture(picture, text);
+    openPopup(popupOpenPicture);
+    page.addEventListener("keydown", setEscPopupPicture)
+  })
+}
+
+// слушатель на кнопку закрытия
+popupOpenPictureExitBth.addEventListener("click", () => {
+  closePopup(popupOpenPicture);
+  page.removeEventListener("keydown", setEscPopupPicture)
+})
+
+
+const createCard = (cardInfo) => {
   const cardTemplate = document.querySelector("#place-template").content;
   const cardElement = cardTemplate.querySelector(".place").cloneNode(true);
   cardElement.querySelector(".place__title").textContent = cardInfo.name;
@@ -89,67 +143,58 @@ function createCard(cardInfo) {
   togglePlaceLike(cardElement);
   openPopupPicture(cardElement);
   return cardElement
-}
+};
 
-function openPopupPicture(element) {
-  const picture = element.querySelector(".place__image");
-  const text = element.querySelector(".place__title");
-  picture.addEventListener("click", () => {
-    popupOpenPictureItem.src = picture.src;
-    popupOpenPictureItem.alt = text.textContent;
-    popupOpenPictureText.textContent = text.textContent;
-    openPopup(popupOpenPicture);
-  })
-}
+const addCardPlace = (cardInfo) => {
+  const cardElement = createCard(cardInfo);
+  placesContainer.prepend(cardElement);
+};
 
-// слушатель на кнопку закрытия
-popupOpenPictureExitBth.addEventListener("click", () => {
-  closePopup(popupOpenPicture);
-})
+initialCards.forEach((item) => {
+  return addCardPlace(item);
+});
 
-// ф-ция открытия и закрытие всех попапов при клике на оверлей
-const popups = Array.from(document.querySelectorAll('.popup'));
-
+// проход по всем попапам и ставим им закрытие по оверлею.
 popups.forEach((popup) =>{
   popup.addEventListener("click", (evt)=>{
     if (evt.target === popup){
       closePopup(popup)
     }
   })
-  document.querySelector(".page__container").addEventListener("keydown", (evt) =>{
-    if (evt.keyCode === 27) {
-      closePopup(popup)
-    }
-  })
 });
 
-// функция удаления карточек
-function deletePlaceCard(cardElement) {
-  cardElement.querySelector(".place__button-delete").addEventListener("click", () => {
-    cardElement.remove();
-  })
-}
-
-// функция лайка
-function togglePlaceLike(cardElement) {
-  cardElement.querySelector(".place__heart-button").addEventListener("click", function (evt) {
-    evt.target.classList.toggle("place__heart-button_active");
-  })
-}
-
-//открытие/закрытие попапа add picture
-popupAddPictureButton.addEventListener("click", () => {
+//-------------------------
+const setEscAddPicture = (evt) =>{
+  if (evt.key ==="Escape") {
+    closePopup(popupAddPicture)
+  }
+};
+const checkValidityAddPicture = () =>{
+  const config = {
+    errorClass: "error-message_shown",
+    inputErrorClass: "popup__input_type_error"
+  };
   const formAddPicture = document.getElementsByName("add-card-form")
   const inactiveButtonClass = "popup__button_disabled";
-  toggleButtonState(formAddPicture[0], popupCreateCardButton, inactiveButtonClass)
-  openPopup(popupAddPicture)
-});
-popupCloseAddPictureButton.addEventListener("click", () => {
-  closePopup(popupAddPicture)
-});
+  toggleButtonState(formAddPicture[0], popupCreateCardButton, inactiveButtonClass);
+  hideInputError(formAddPicture[0], pictureNameInput, config);
+  hideInputError(formAddPicture[0], pictureLinkInput, config);
+  pictureNameInput.value = "";
+  pictureLinkInput.value = "";
+};
+const openAddPicture = () =>{
+  page.addEventListener("keydown", setEscAddPicture);
+  checkValidityAddPicture();
+  openPopup(popupAddPicture);
+};
+const closeAddPicture = () =>{
+  page.removeEventListener("keydown", setEscAddPicture);
+  closePopup(popupAddPicture);
+};
+//--------------------------
 
 //функция отправки формы добавления карточки
-function SubmitformAddCard(evt) {
+const SubmitformAddCard = (evt) => {
   evt.preventDefault();
   const nameInput = pictureNameInput.value;
   const linkInput = pictureLinkInput.value;
@@ -163,8 +208,6 @@ function SubmitformAddCard(evt) {
   pictureLinkInput.value = "";
 }
 
-popupAddPicture.addEventListener("submit", SubmitformAddCard)
-
 enableValidation({
   formSelector: ".form",
   inputSelector: ".popup__input",
@@ -173,5 +216,22 @@ enableValidation({
   errorClass:"error-message_shown",
   inputErrorClass: "popup__input_type_error"
 });
+
+
+//открытие/закрытие попапа add picture
+popupAddPictureButton.addEventListener("click",  openAddPicture);
+popupCloseAddPictureButton.addEventListener("click", closeAddPicture);
+// слушатель на кнопку закрытия
+popupOpenPictureExitBth.addEventListener("click", () => {
+  closePopup(popupOpenPicture);
+});
+// слушатель на отрпавку формы папапа добавления карточек
+popupAddPicture.addEventListener("submit", SubmitformAddCard);
+// слушатель на кнопку открытия попапа редактирования профиля
+popupEditProfileButton.addEventListener("click", openPopupEditProfile)
+// слушатель на кнопку закрытия попапа редактирования профиля
+popupCloseProfileButton.addEventListener("click", closePopupEditProfile);
+//отправка popup EditProfile
+popupEditProfile.addEventListener("submit", submitFormEditProfile);
 
 
