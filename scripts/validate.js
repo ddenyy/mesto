@@ -59,5 +59,9 @@ const toggleButtonState = (formElement, buttonElement, inactiveButtonClass) =>{
   buttonElement.classList.toggle(inactiveButtonClass, !isFormValid)
 }
 
+const disableButton = (button) =>{
+  button.disabled = true;
+  button.classList.add("popup__button_disabled");
+}
 
 
