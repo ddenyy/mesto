@@ -1,3 +1,6 @@
+import {initialCards} from "./inital-cards.js"
+
+
 //----------------------
 // попап edit profile
 const popupEditProfile = document.querySelector(".popup_edit_profile");
@@ -204,8 +207,8 @@ popupEditProfileButton.addEventListener("click", openPopupEditProfile)
 popupCloseProfileButton.addEventListener("click", ()=>{closePopup(popupEditProfile)} );
 //отправка popup EditProfile
 popupEditProfile.addEventListener("submit", submitFormEditProfile);
-// слушатель на кнопку закрытия
-popupOpenPictureExitBth.addEventListener("click", () => {
-  closePopup(popupOpenPicture);
-})
 
+
+export {popupOpenPictureItem, popupOpenPictureText, popupOpenPicture, openPopup, closePopup,
+  popupOpenPictureExitBth,
+}

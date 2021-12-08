@@ -1,3 +1,5 @@
+export {enableValidation}
+
 const enableValidation = (config) =>{
   const {formSelector, ...other} = config;
   const formsList = Array.from(document.querySelectorAll(formSelector));
