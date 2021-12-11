@@ -32,7 +32,7 @@
         <footer class="footer page__footer">
             <p class="footer__text">&copy; 2021 Mesto Russia</p>
         </footer>
-        <template id="place-template">
+      <template id="place-template">
         <article class="place">
           <button class="place__button-delete"></button>
           <img class="place__image" src=" " alt=""/>
@@ -64,7 +64,7 @@
         <div class="popup popup_add_picture">
             <div class="popup__window">
                 <button type="button" class="popup__button-exit popup__button-exit_place_add-form"></button>
-                <form name="add-card-form" class="form popup__content">
+                <form id="add-card-form" class="form popup__content">
                     <h2 class="popup__title">Новое место</h2>
                     <fieldset class="popup__contact-info">
                         <div class="input-container">
@@ -88,9 +88,11 @@
             </figure>
         </div>
     </div>
-    <script type="module" src="scripts/validate.js"></script>
-    <script type="module" src="scripts/inital-cards.js"></script>
-    <script type="module" src="scripts/index.js"></script>
+    <script type="module" src="scripts/FormValidator.js"></script>
+    <script type="module" src="scripts/utils.js"></script>
+    <script type="module"  src="scripts/inital-cards.js"></script>
+    <script type="module"  src="scripts/Card.js"></script>
+    <script type="module"  src="scripts/index.js"></script>
 </body>
 
 </html>
