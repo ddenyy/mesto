@@ -1,3 +1,10 @@
+export {
+  openPopupPicture,
+  popupOpenPicture,
+  popupOpenPictureExitBtn,
+  closePopup,
+  openPopup,
+}
 // вся страница
 const page = document.querySelector(".page");
 //попап открытия картинки на fullscreen
@@ -46,11 +53,4 @@ const closePopup = (popupElement) => {
 }
 
 
-export {
-  openPopupPicture,
-  popupOpenPicture,
-  popupOpenPictureExitBtn,
-  closePopup,
-  openPopup,
-}
 

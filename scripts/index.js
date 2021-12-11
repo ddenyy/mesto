@@ -1,4 +1,3 @@
-//import {enableValidation, hideInputError, disableButton} from "./validate.js"
 import { initialCards } from "./inital-cards.js";
 import {Card} from "./Card.js"
 import {
@@ -42,7 +41,6 @@ const profileJob = document.querySelector(".profile__job");
 const popupEditProfileButton = document.querySelector(".profile__edit-button");
 //кнопка открытия попапа addPicture в профиле на основной странице
 const popupAddPictureButton = document.querySelector(".profile__add-button");
-
 //массив всех попапов
 const popups = Array.from(document.querySelectorAll('.popup'));
 
@@ -116,15 +114,6 @@ const SubmitformAddCard = (evt) => {
   pictureLinkInput.value = "";
 }
 
-// enableValidation({
-//   formSelector: ".form",
-//   inputSelector: ".popup__input",
-//   submitButtonSelector: ".popup__button_submit",
-//   inactiveButtonClass: "popup__button_disabled",
-//   errorClass:"error-message_shown",
-//   inputErrorClass: "popup__input_type_error",
-// })
-
  const configError = {
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button_submit",
@@ -138,6 +127,7 @@ ValidatorAddPicture.enableValidation();
 
 const ValidatorEditProfile = new FormValidator(configError, formEditProfile);
 ValidatorEditProfile.enableValidation();
+
 //открытие/закрытие попапа add picture
 popupAddPictureButton.addEventListener("click", openPopupAddPicture);
 popupCloseAddPictureButton.addEventListener("click", ()=>{closePopup(popupAddPicture)});
