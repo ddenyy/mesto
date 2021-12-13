@@ -5,7 +5,7 @@ import {
   popupOpenPictureExitBtn,
   closePopup,
   openPopup,
-  openPopupPicture
+  setImageClickHandler
 } from "./utils.js"
 import {FormValidator} from "./FormValidator.js"
 //----------------------
@@ -66,7 +66,7 @@ const openPopupEditProfile =() =>{
 
 
 // инструкция к добавлению карточки. чтобы открыть попап на фулскрин
-const instruction = (...args) =>{ openPopupPicture(...args)}
+const instruction = (...args) =>{ setImageClickHandler(...args)}
 // ф-ция добавления карточки
 const addCardPlace = (cardInfo) => {
   const card = new Card(cardInfo, "#place-template", instruction)
@@ -100,13 +100,13 @@ const openPopupAddPicture = () =>{
 
 
 //функция отправки формы добавления карточки
-const SubmitformAddCard = (evt) => {
+const submitformAddCard = (evt) => {
   evt.preventDefault();
-  const nameInput = pictureNameInput.value;
-  const linkInput = pictureLinkInput.value;
+  const cardName = pictureNameInput.value;
+  const cardLink = pictureLinkInput.value;
   let inputs = {
-    name: nameInput,
-    link: linkInput
+    name: cardName,
+    link: cardLink
   }
   addCardPlace(inputs);
   closePopup(popupAddPicture);
@@ -134,7 +134,7 @@ popupCloseAddPictureButton.addEventListener("click", ()=>{closePopup(popupAddPic
 // слушатель на кнопку закрытия
 popupOpenPictureExitBtn.addEventListener("click", () => {closePopup(popupOpenPicture);});
 // слушатель на отрпавку формы папапа добавления карточек
-popupAddPicture.addEventListener("submit", SubmitformAddCard);
+popupAddPicture.addEventListener("submit", submitformAddCard);
 // слушатель на кнопку открытия попапа редактирования профиля
 popupEditProfileButton.addEventListener("click", openPopupEditProfile)
 // слушатель на кнопку закрытия попапа редактирования профиля

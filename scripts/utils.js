@@ -1,5 +1,5 @@
 export {
-  openPopupPicture,
+  setImageClickHandler,
   popupOpenPicture,
   popupOpenPictureExitBtn,
   closePopup,
@@ -24,7 +24,7 @@ const fillPopupPicture = (picture, text) =>{
   popupOpenPictureText.textContent = text.textContent;
 };
 
-function openPopupPicture(element) {
+function setImageClickHandler(element) {
   const picture = element.querySelector(".place__image");
   const text = element.querySelector(".place__title");
   picture.addEventListener("click", () => {

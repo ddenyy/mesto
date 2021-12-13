@@ -4,14 +4,13 @@ class FormValidator {
   constructor (config, form) {
     this._config = config;
     this._form = form;
-    this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector))
+    this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
+    this._sbmtButton = this._form.querySelector(this._config.submitButtonSelector);
   }
 
-  _toggleButtonState = () =>{
-    const buttonElement = this._form.querySelector(this._config.submitButtonSelector);
+  _toggleButtonState = () => {
     const isFormValid = this._form.checkValidity();
-    buttonElement.disabled = !isFormValid;
-    buttonElement.classList.toggle(this._config.inactiveButtonClass, !isFormValid)
+    isFormValid ? this.enableBth() : this.disableBtn();
   }
 
   _hideInputError = (inputElement) => {
@@ -67,10 +66,17 @@ class FormValidator {
     })
   }
 
-  disableBtn () {
-    this._form.
-    querySelector(this._config.submitButtonSelector).
+  disableBtn() {
+    this._sbmtButton.
     classList.
     add(this._config.inactiveButtonClass)
+    this._sbmtButton.disabled = true;
+  }
+
+  enableBth() {
+    this._sbmtButton.
+    classList.
+    remove(this._config.inactiveButtonClass)
+    this._sbmtButton.disabled = false;
   }
 }
