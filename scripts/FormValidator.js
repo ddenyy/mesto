@@ -10,7 +10,7 @@ class FormValidator {
 
   _toggleButtonState = () => {
     const isFormValid = this._form.checkValidity();
-    isFormValid ? this.enableBth() : this.disableBtn();
+    isFormValid ? this._enableBth() : this.disableBtn();
   }
 
   _hideInputError = (inputElement) => {
@@ -44,8 +44,6 @@ class FormValidator {
         this._toggleButtonState();
       })
     })
-
-
   }
 
   enableValidation() {
@@ -73,7 +71,7 @@ class FormValidator {
     this._sbmtButton.disabled = true;
   }
 
-  enableBth() {
+  _enableBth() {
     this._sbmtButton.
     classList.
     remove(this._config.inactiveButtonClass)

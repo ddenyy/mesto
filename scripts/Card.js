@@ -19,10 +19,10 @@ export{Card}
 
   createCard = () => {
     this._element = this._getTemplate();
+    this._placeImage = this._element.querySelector(".place__image");
     this._setListeners();
-    this._instruction(this._element)
-    this._element.querySelector(".place__image").src = this._image;
-    this._element.querySelector(".place__image").alt = this._title;
+    this._placeImage.src = this._image;
+    this._placeImage.alt = this._title;
     this._element.querySelector(".place__title").textContent = this._title;
     return this._element;
   }
@@ -37,6 +37,10 @@ export{Card}
     // обработчик лайка
     this._element.querySelector(".place__heart-button").addEventListener("click", (evt) => {
       evt.target.classList.toggle("place__heart-button_active");
+    })
+
+    this._placeImage.addEventListener("click", ()=>{
+      this._instruction(this._title, this._image)
     })
 
   }

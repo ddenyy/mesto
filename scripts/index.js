@@ -1,3 +1,4 @@
+
 import { initialCards } from "./inital-cards.js";
 import {Card} from "./Card.js"
 import {
@@ -19,7 +20,7 @@ const popupSaveEditProfileBtn = document.querySelector(".popup__button_update_pr
 // кнопка закрытия попапа edit profile
 const popupCloseProfileButton = document.querySelector(".popup__button-exit_place_edit-form");
 //форма изменения профиля
-const formEditProfile = document.getElementsByName("edit-Profile-form")[0];
+const formEditProfile = document.querySelector("#edit-Profile-form");
 //---------------------
 //попап add picture
 const popupAddPicture = document.querySelector(".popup_add_picture");
@@ -41,8 +42,6 @@ const profileJob = document.querySelector(".profile__job");
 const popupEditProfileButton = document.querySelector(".profile__edit-button");
 //кнопка открытия попапа addPicture в профиле на основной странице
 const popupAddPictureButton = document.querySelector(".profile__add-button");
-//массив всех попапов
-const popups = Array.from(document.querySelectorAll('.popup'));
 
 const placesContainer = document.querySelector(".places");
 
@@ -59,42 +58,38 @@ const submitFormEditProfile = (evt) => {
 const openPopupEditProfile =() =>{
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  ValidatorEditProfile.clearErrors();
-  ValidatorEditProfile.disableBtn()
+  formValidators[formEditProfile.getAttribute("id")].clearErrors();
+  formValidators[formEditProfile.getAttribute("id")].disableBtn();
   openPopup(popupEditProfile)
 }
 
 
 // инструкция к добавлению карточки. чтобы открыть попап на фулскрин
 const instruction = (...args) =>{ setImageClickHandler(...args)}
+
+//ф-ция создания карточки
+const createCard = (data) =>{
+  const card = new Card(data, "#place-template", instruction)
+  return card.createCard()
+}
+
 // ф-ция добавления карточки
-const addCardPlace = (cardInfo) => {
-  const card = new Card(cardInfo, "#place-template", instruction)
-  const cardElement = card.createCard()
+const addCardPlace = (cardData) => {
+  const cardElement = createCard(cardData);
   placesContainer.prepend(cardElement);
 };
 
 // проход по масиву карточек
-initialCards.forEach((item) => {
+initialCards.reverse().forEach((item) => {
   return addCardPlace(item);
 });
-
-// проход по всем попапам и ставим им закрытие по оверлею.
-popups.forEach((popup) =>{
-  popup.addEventListener("click", (evt)=>{
-    if (evt.target === popup){
-      closePopup(popup)
-    }
-  })
-});
-
 
 // функция открытия попапа добавления карточки
 const openPopupAddPicture = () =>{
   pictureNameInput.value = "";
   pictureLinkInput.value = "";
-  ValidatorAddPicture.clearErrors();
-  ValidatorAddPicture.disableBtn();
+  formValidators[formAddPicture.getAttribute("id")].clearErrors()
+  formValidators[formAddPicture.getAttribute("id")].disableBtn()
   openPopup(popupAddPicture);
 }
 
@@ -115,6 +110,7 @@ const submitformAddCard = (evt) => {
 }
 
  const configError = {
+  formSelector: ".form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button_submit",
   inactiveButtonClass: "popup__button_disabled",
@@ -122,11 +118,25 @@ const submitformAddCard = (evt) => {
   inputErrorClass: "popup__input_type_error",
 };
 
-const ValidatorAddPicture = new FormValidator(configError, formAddPicture);
-ValidatorAddPicture.enableValidation();
 
-const ValidatorEditProfile = new FormValidator(configError, formEditProfile);
-ValidatorEditProfile.enableValidation();
+const formValidators ={};
+
+// включение валидации
+
+const enableValidation = (config) =>{
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement)
+    // получаем данные из атрибута id у формы
+    const formId = formElement.getAttribute("id")
+
+    // в обект записываем под id формы
+    formValidators[formId] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(configError);
 
 //открытие/закрытие попапа add picture
 popupAddPictureButton.addEventListener("click", openPopupAddPicture);
@@ -141,6 +151,8 @@ popupEditProfileButton.addEventListener("click", openPopupEditProfile)
 popupCloseProfileButton.addEventListener("click", ()=>{closePopup(popupEditProfile)} );
 //отправка popup EditProfile
 popupEditProfile.addEventListener("submit", submitFormEditProfile);
+
+
 
 
 

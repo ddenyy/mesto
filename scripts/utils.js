@@ -10,40 +10,35 @@ const page = document.querySelector(".page");
 //попап открытия картинки на fullscreen
 const popupOpenPicture = document.querySelector(".popup_picture_fullscreen");
 // фото из попапа fullscreen
-const popupOpenPictureItem = document.querySelector(".popup__picture");
+const popupOpenPictureImage = document.querySelector(".popup__picture");
 // подпись к фото из попапа fullscreen
 const popupOpenPictureText = document.querySelector(".popup__picture-name");
 // кнопка закрытия
 const popupOpenPictureExitBtn = document.querySelector(".popup__button-exit_place_picture");
 
 
-//функция заполняет подпись и картинку в попапе открытия картинки
-const fillPopupPicture = (picture, text) =>{
-  popupOpenPictureItem.src = picture.src;
-  popupOpenPictureItem.alt = text.textContent;
-  popupOpenPictureText.textContent = text.textContent;
-};
-
-function setImageClickHandler(element) {
-  const picture = element.querySelector(".place__image");
-  const text = element.querySelector(".place__title");
-  picture.addEventListener("click", () => {
-    fillPopupPicture(picture, text);
-    openPopup(popupOpenPicture);
-  })
+function setImageClickHandler(name, link) {
+  popupOpenPictureImage.src = link;
+  popupOpenPictureImage.alt = name;
+  popupOpenPictureText.textContent = name;
+  openPopup(popupOpenPicture);
 }
 
 const setExitByEsc = (evt) =>{
-  if (evt.key ==="Escape") {
-         closePopup(document.querySelector(".popup_opened"))
-       }
+  if (evt.key === "Escape") {
+    closePopup(document.querySelector(".popup_opened"))
+  }
 }
 
 // функция открывает  попап
 const openPopup = (popupElement) => {
   popupElement.classList.add("popup_opened");
   page.addEventListener("keydown", setExitByEsc);
-
+  popupElement.addEventListener("click", (evt) =>{
+    if (evt.target === popupElement){
+      closePopup(popupElement)
+    }
+  })
 }
 
 // функция закрывает попап
