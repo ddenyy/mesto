@@ -1,11 +1,9 @@
-export{Card}
-
- class Card {
-  constructor(data, cardSelector, instruction){
+export default class Card {
+  constructor(data, cardSelector, handleCardClick){
     this._title = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
-    this._instruction = instruction;
+    this.handleCardClick = handleCardClick;
   }
 
   _getTemplate = () =>{
@@ -40,12 +38,12 @@ export{Card}
     })
 
     this._placeImage.addEventListener("click", ()=>{
-      this._instruction(this._title, this._image)
+    const data = {name: this._title, image: this._image}
+      this.handleCardClick(data)
     })
 
   }
 
 }
-
 
 

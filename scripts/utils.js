@@ -1,10 +1,10 @@
-export {
-  setImageClickHandler,
-  popupOpenPicture,
-  popupOpenPictureExitBtn,
-  closePopup,
-  openPopup,
-}
+ export {
+//   setImageClickHandler,
+//   popupOpenPicture,
+//   popupOpenPictureExitBtn,
+   closePopup,
+   openPopup,
+ }
 // вся страница
 const page = document.querySelector(".page");
 //попап открытия картинки на fullscreen
@@ -17,33 +17,27 @@ const popupOpenPictureText = document.querySelector(".popup__picture-name");
 const popupOpenPictureExitBtn = document.querySelector(".popup__button-exit_place_picture");
 
 
-function setImageClickHandler(name, link) {
-  popupOpenPictureImage.src = link;
-  popupOpenPictureImage.alt = name;
-  popupOpenPictureText.textContent = name;
-  openPopup(popupOpenPicture);
-}
+// function setImageClickHandler(name, link) {
+//   popupOpenPictureImage.src = link;
+//   popupOpenPictureImage.alt = name;
+//   popupOpenPictureText.textContent = name;
+//   openPopup(popupOpenPicture);
+// }
 
-const setExitByEsc = (evt) =>{
-  if (evt.key === "Escape") {
-    closePopup(document.querySelector(".popup_opened"))
-  }
-}
+// const setExitByEsc = (evt) =>{
+//   if (evt.key === "Escape") {
+//     closePopup(document.querySelector(".popup_opened"))
+//   }
+// }
 
 // функция открывает  попап
 const openPopup = (popupElement) => {
   popupElement.classList.add("popup_opened");
-  page.addEventListener("keydown", setExitByEsc);
-  popupElement.addEventListener("click", (evt) =>{
-    if (evt.target === popupElement){
-      closePopup(popupElement)
-    }
-  })
-}
+  }
+
 
 // функция закрывает попап
 const closePopup = (popupElement) => {
-  page.removeEventListener("keydown", setExitByEsc);
   popupElement.classList.remove("popup_opened");
 }
 
