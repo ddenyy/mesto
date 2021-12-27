@@ -7,7 +7,6 @@
     <meta name="keywords" content="html, css, grid, flex, frontend, js, mesto, адаптивная вёрстка, Яндекс Практикум" />
     <meta name="author" content="Денис Осипов" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="pages/index.css" />
     <title>Mesto</title>
 </head>
 
@@ -18,7 +17,7 @@
         </header>
         <main class="content page__content">
             <section class="profile content__profile">
-                <img class="profile__image" src="images/profile_avatar.png" alt="аватар" />
+                <img class="profile__image" src="<%=require('./images/profile_avatar.png')%>" alt="аватар" />
                 <div class="profile__info">
                     <h1 class="profile__username">Жак-Ив Кусто</h1>
                     <button aria-label="edit" type="button" class="profile__edit-button"></button>
@@ -88,7 +87,7 @@
             </figure>
         </div>
     </div>
-    <script type="module"  src="scripts/index.js"></script>
+
 </body>
 
 </html>

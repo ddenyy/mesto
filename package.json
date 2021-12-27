@@ -1,10 +1,11 @@
 {
   "name": "mesto",
   "version": "0.0.1",
-  "description": "Mesto project Yandex",
+  "description": "Данный проект является итоговой работой за шестой спринт на ***Яндекс.Практикуме***.\r ### Обзор\r ----\r ### **О чём проект?**",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,23 @@
   "bugs": {
     "url": "https://github.com/ddenyy/mesto/issues"
   },
-  "homepage": "https://github.com/ddenyy/mesto#readme"
+  "homepage": "https://github.com/ddenyy/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "autoprefixer": "^10.4.0",
+    "babel-loader": "^8.2.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.5.1",
+    "cssnano": "^5.0.14",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.4.5",
+    "postcss-loader": "^6.2.1",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.1"
+  },
+  "dependencies": {
+    "core-js": "^3.20.1"
+  }
 }
