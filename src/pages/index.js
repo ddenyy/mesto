@@ -49,11 +49,9 @@ const popupAddCard = new PopupWithForm(".popup_add_picture", (data) => {
     link: data["picture-link"]
   }
   // на основе данных импутов создаем карточку
-  const newCard = new Card(dataForCard, "#place-template", handleCardClick);
-  // получаем полностью готовую карточку в cardElement
-  const cardElement =  newCard.createCard();
+  const newCard = new Card(dataForCard, "#place-template", handleCardClick).createCard();
   // добавляем в секцию cardList нашу готовую карточку
-  cardList.addItem(cardElement);
+  cardList.addItem(newCard);
   // закрываем попап после sumbit формы.
   popupAddCard.close();
 });
