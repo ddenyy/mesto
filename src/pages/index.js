@@ -1,20 +1,22 @@
-import '../pages/index.css'
-import {initialCards} from "./inital-cards.js";
-import Card from "./Card.js"
-import FormValidator from "./FormValidator.js"
-import PopupWithImage from "./PopupWithImage.js"
-import Section from "./Section.js";
-import PopupWithForm from "./PopupWithForm.js";
-import UserInfo from "./UserInfo.js";
+import './index.css'
+import {initialCards} from "../components/inital-cards.js";
+import Card from "../components/Card.js"
+import FormValidator from "../components/FormValidator.js"
+import PopupWithImage from "../components/PopupWithImage.js"
+import Section from "../components/Section.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 import {
   popupEditProfileButton,
   popupAddPictureButton,
   formAddPicture,
-  inptName,
-  inptJob
-} from "./cosntants.js"
+  inputName,
+  inputJob,
+  configError,
+  formValidators
+} from "../utils/cosntants.js"
 
-// спасибо вам за ревью! на самом деле даже странно как-то что так мало недочётов в работе)
+
 const popupFullScrImg = new PopupWithImage(".popup_picture_fullscreen");
 popupFullScrImg.setEventListeners();
 
@@ -33,31 +35,30 @@ const cardList = new Section(
     cardList.addItem(cardElement)
   }
 },
-".places"
-)
+".places");
 
 // рендерим все карточки разом.
 cardList.renderer();
 
 //создаем попап добавления карточек
-const popupAddCard = new PopupWithForm(".popup_add_picture", (evt) => {
-  evt.preventDefault();
-  // получаем данные из импутов
-  let data = {
-    name: popupAddCard._getInputValues()[0].value,
-    link: popupAddCard._getInputValues()[1].value
+const popupAddCard = new PopupWithForm(".popup_add_picture", (data) => {
+  // информация из импутов
+  //const inputValues = popupAddCard._getInputValues();
+  const dataForCard = {
+    name: data["picture-name"],
+    link: data["picture-link"]
   }
   // на основе данных импутов создаем карточку
-  const newCard = new Card(data, "#place-template", handleCardClick);
+  const newCard = new Card(dataForCard, "#place-template", handleCardClick);
   // получаем полностью готовую карточку в cardElement
   const cardElement =  newCard.createCard();
   // добавляем в секцию cardList нашу готовую карточку
   cardList.addItem(cardElement);
   // закрываем попап после sumbit формы.
   popupAddCard.close();
-},
-"add-picture-form"
-)
+});
+// ставим слушателей на попап добавления карточки
+popupAddCard.setEventListeners();
 
 // класс работающий с информацией в профиле (имя и работа)
 const userInfo = new UserInfo({nameSelector: ".profile__username", jobSelector:".profile__job"});
@@ -66,27 +67,17 @@ const userInfo = new UserInfo({nameSelector: ".profile__username", jobSelector:"
 const popupEditProfile = new PopupWithForm(".popup_edit_profile", (evt) => {
   evt.preventDefault();
   // информация из импутов
-  let data = {
-    name: popupEditProfile._getInputValues()[0].value,
-    job: popupEditProfile._getInputValues()[1].value
+  const inputValues = popupEditProfile._getInputValues();
+  debugger
+  const data = {
+    name: inputValues["user-name"],
+    job: inputValues["user-job"]
   }
   userInfo.setUserInfo(data);
   popupEditProfile.close();
-},
-"edit-profile-form"
-)
+});
 
- const configError = {
-  formSelector: ".form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button_submit",
-  inactiveButtonClass: "popup__button_disabled",
-  errorClass:"error-message_shown",
-  inputErrorClass: "popup__input_type_error",
-};
-
-
-const formValidators ={};
+popupEditProfile.setEventListeners();
 
 // включение валидации
 
@@ -113,20 +104,15 @@ popupAddPictureButton.addEventListener("click", ()=>{
   // деактивация кнопки попапа
   formValidators[formAddPicture.getAttribute("id")].clearErrors();
   formValidators[formAddPicture.getAttribute("id")].disableBtn();
-  // ставим слушателей на попап добавления карточки
-  popupAddCard.setEventListeners();
 })
 
 
 // слушатель на открытие попапа редактирования профиля
 popupEditProfileButton.addEventListener("click", () => {
-  const profileInfo = userInfo.getUserInfo();
-  inptName.value = profileInfo.name;
-  inptJob.value = profileInfo.job
-  popupEditProfile.setEventListeners();
+  inputName.value = userInfo.getUserInfo().name;
+  inputJob.value = userInfo.getUserInfo().job;
   popupEditProfile.open();
 })
-
 
 
 
