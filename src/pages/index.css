@@ -90,6 +90,10 @@
 
 @import url(../blocks/place/__heart-button/heart-button.css);
 
+/*элемент количество лайков*/
+
+@import url(../blocks/place/__heart-quantity/place__heart-quantity.css);
+
 /*модификатор heart active*/
 
 @import url(../blocks/place/__heart-button/_active/heart-button_active.css);

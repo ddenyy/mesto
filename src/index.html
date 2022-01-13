@@ -35,8 +35,11 @@
           <button class="place__button-delete"></button>
           <img class="place__image" src=" " alt=""/>
           <div class="place__item">
-            <h2 class="place__title">Карачаево-Ч...</h2>
-            <button type="button" class="place__heart-button"></button>
+            <h2 class="place__title"></h2>
+            <div class="place__container_like">
+              <button type="button" class="place__heart-button"></button>
+              <p class="place__heart-quantity">2</p>
+            </div>
           </div>
         </article>
       </template>
@@ -84,6 +87,12 @@
               <button type="button" class="popup__button-exit popup__button-exit_place_picture"></button>
               <figcaption class="popup__picture-name"></figcaption>
             </figure>
+        </div>
+        <div class="popup popup_delete_card">
+          <div class="popup__window">
+            <h2 class="popup__title">Вы уверены ?</h2>
+            <button type="button" class="popup__button-exit popup__button-exit_place_delete-form"></button>
+          </div>
         </div>
     </div>
 </body>
