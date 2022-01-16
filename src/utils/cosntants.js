@@ -7,6 +7,14 @@ const formAddPicture = document.querySelector("#add-picture-form");
 // импуты в форме редактирования профиля
 const inputName = document.querySelector("#popup-edit-username");
 const inputJob = document.querySelector("#popup-edit-job");
+//форма в popupEditAvatar
+const formEditAvatar = document.querySelector("#change-avatar-form");
+// кнопка подтверждения удаления карточки
+const ButtonAcceptDelete = document.querySelector(".popup__button_delete_card")
+
+//аватар пользователя
+
+const profileAvatar = document.querySelector(".profile__image");
 
 const configError = {
   formSelector: ".form",
@@ -27,5 +35,8 @@ export {
   inputName,
   inputJob,
   configError,
-  formValidators
+  formValidators,
+  profileAvatar,
+  formEditAvatar,
+  ButtonAcceptDelete,
 };

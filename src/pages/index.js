@@ -6,6 +6,7 @@ import PopupWithImage from "../components/PopupWithImage.js"
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Popup from "../components/Popup.js"
 import {
   popupEditProfileButton,
   popupAddPictureButton,
@@ -13,9 +14,37 @@ import {
   inputName,
   inputJob,
   configError,
-  formValidators
+  formValidators,
+  profileAvatar,
+  formEditAvatar,
+  ButtonAcceptDelete,
 } from "../utils/cosntants.js"
+import features from 'core-js/features';
 
+import Api from '../components/Api';
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-34',
+  headers: {
+    authorization: '74aad7c8-f4fa-465b-9587-ab3365fadc30',
+    'Content-Type': 'application/json'
+  }
+});
+
+
+api.getInitialCards()
+.then( res => {
+  cardList.renderCards(res)
+})
+
+
+
+
+
+const createNewCard = (data) => {
+  const card = new Card(data, "#place-template", handleCardClick, handleCardDelete)
+  return card.createCard()
+}
 
 const popupFullScrImg = new PopupWithImage(".popup_picture_fullscreen");
 popupFullScrImg.setEventListeners();
@@ -25,33 +54,38 @@ function handleCardClick (data) {
   popupFullScrImg.open(data)
 };
 
+// попап удаления карточки
+const popupDeleteCard = new Popup(".popup_delete_card");
+popupDeleteCard.setEventListeners();
+// колбэк открытия попапа удаления карточки
+const handleCardDelete = (element) => {
+  //открой попап
+  popupDeleteCard.open()
+  ButtonAcceptDelete.addEventListener("click", ()=>{
+    element.remove()
+    popupDeleteCard.close()
+  })
+}
+
 // рендерим массив карточек в общем контейнере places
 const cardList = new Section(
   {
-  items: initialCards,
-  renderer: (cardItem) => {
-    const card = new Card(cardItem, "#place-template", handleCardClick)
-    const cardElement = card.createCard()
-    cardList.addItem(cardElement)
+  renderer: (data)  => {
+    cardList.addItem(createNewCard(data))
   }
 },
 ".places");
 
-// рендерим все карточки разом.
-cardList.renderer();
 
 //создаем попап добавления карточек
 const popupAddCard = new PopupWithForm(".popup_add_picture", (data) => {
   // информация из импутов
-  //const inputValues = popupAddCard._getInputValues();
   const dataForCard = {
     name: data["picture-name"],
     link: data["picture-link"]
   }
-  // на основе данных импутов создаем карточку
-  const newCard = new Card(dataForCard, "#place-template", handleCardClick).createCard();
   // добавляем в секцию cardList нашу готовую карточку
-  cardList.addItem(newCard);
+  cardList.addItem(createNewCard(dataForCard));
   // закрываем попап после sumbit формы.
   popupAddCard.close();
 });
@@ -62,20 +96,25 @@ popupAddCard.setEventListeners();
 const userInfo = new UserInfo({nameSelector: ".profile__username", jobSelector:".profile__job"});
 
 
-const popupEditProfile = new PopupWithForm(".popup_edit_profile", (evt) => {
-  evt.preventDefault();
-  // информация из импутов
-  const inputValues = popupEditProfile._getInputValues();
-  debugger
-  const data = {
-    name: inputValues["user-name"],
-    job: inputValues["user-job"]
+const popupEditProfile = new PopupWithForm(".popup_edit_profile", (data) => {
+  // объект с данными всех импутов
+  const dataForEditProfile = {
+    name: data["user-name"],
+    job: data["user-job"]
   }
-  userInfo.setUserInfo(data);
+  userInfo.setUserInfo(dataForEditProfile);
   popupEditProfile.close();
 });
 
 popupEditProfile.setEventListeners();
+
+// попап редактирования аватарки
+const popupEditAvatar = new PopupWithForm(".popup_change_avatar", (data) => {
+  profileAvatar.style.backgroundImage = `url(${data["avatar-image"]})`;
+  popupEditAvatar.close();
+});
+
+popupEditAvatar.setEventListeners()
 
 // включение валидации
 
@@ -92,8 +131,6 @@ const enableValidation = (config) =>{
 };
 
 enableValidation(configError);
-
-
 
 // слушатель на открытия попапа добавления карточки
 popupAddPictureButton.addEventListener("click", ()=>{
@@ -112,8 +149,9 @@ popupEditProfileButton.addEventListener("click", () => {
   popupEditProfile.open();
 })
 
-
-
-
-
+// слушатель на открытие попапа редактирования аватара
+profileAvatar.addEventListener("click", () => {
+  formValidators[formEditAvatar.getAttribute("id")].clearErrors();
+  popupEditAvatar.open();
+})
 
