@@ -20,7 +20,6 @@ export default class Card {
   createCard = () => {
     this._element = this._getTemplate();
     this._placeImage = this._element.querySelector(".place__image");
-    this._placeDeleteButton = this._element.querySelector("place__button-delete");
     this._setListeners();
     this._placeImage.src = this._link;
     this._placeImage.alt = this._title;

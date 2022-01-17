@@ -31,32 +31,46 @@ const api = new Api({
   }
 });
 
-
+// рендер карточек
 api.getInitialCards()
 .then( res => {
   cardList.renderCards(res)
 })
+.catch((err) => {console.log(err.status)})
+
+// рендер профиля
+api.getUserInfo()
+.then(info => {
+ const profile = {
+    name: info.name,
+    about: info.about,
+    avatar: info.avatar
+  }
+  userInfo.setUserInfo(profile)
+})
+.catch(err => {console.log(err)})
 
 
-
-
-
+// функция создания новой карточки
 const createNewCard = (data) => {
   const card = new Card(data, "#place-template", handleCardClick, handleCardDelete)
   return card.createCard()
 }
 
+// попап открытия фото на полный экран
 const popupFullScrImg = new PopupWithImage(".popup_picture_fullscreen");
 popupFullScrImg.setEventListeners();
 
-// колбэк открытия на полный экран картинки в карточке
+// ф-ция колбэк открытия на полный экран картинки в карточке
 function handleCardClick (data) {
   popupFullScrImg.open(data)
 };
 
 // попап удаления карточки
-const popupDeleteCard = new Popup(".popup_delete_card");
+// включаем слушателей на попап удаления карточек
+const popupDeleteCard = new Popup(".popup_delete_card")
 popupDeleteCard.setEventListeners();
+
 // колбэк открытия попапа удаления карточки
 const handleCardDelete = (element) => {
   //открой попап
@@ -67,7 +81,7 @@ const handleCardDelete = (element) => {
   })
 }
 
-// рендерим массив карточек в общем контейнере places
+// контейнер каточек
 const cardList = new Section(
   {
   renderer: (data)  => {
@@ -93,16 +107,22 @@ const popupAddCard = new PopupWithForm(".popup_add_picture", (data) => {
 popupAddCard.setEventListeners();
 
 // класс работающий с информацией в профиле (имя и работа)
-const userInfo = new UserInfo({nameSelector: ".profile__username", jobSelector:".profile__job"});
+const userInfo = new UserInfo({nameSelector: ".profile__username", jobSelector:".profile__job", avatarSelector:".profile__image"});
 
 
 const popupEditProfile = new PopupWithForm(".popup_edit_profile", (data) => {
-  // объект с данными всех импутов
-  const dataForEditProfile = {
-    name: data["user-name"],
-    job: data["user-job"]
-  }
-  userInfo.setUserInfo(dataForEditProfile);
+  // объект данных из импутов
+  const dataProfile = {name: data["user-name"], about: data["user-job"]};
+  // обработка через api
+  api.updateUserInfo(dataProfile)
+   .then((res) => {
+     return res.json()
+   })
+   .then((data) => {
+    userInfo.setUserInfo(data);
+    console.log(data)
+   })
+   .catch(err => console.log(err.status))
   popupEditProfile.close();
 });
 
@@ -110,7 +130,14 @@ popupEditProfile.setEventListeners();
 
 // попап редактирования аватарки
 const popupEditAvatar = new PopupWithForm(".popup_change_avatar", (data) => {
-  profileAvatar.style.backgroundImage = `url(${data["avatar-image"]})`;
+  //profileAvatar.style.backgroundImage = `url(${data["avatar-image"]})`;
+  api.updateUserAvatar(data["avatar-image"])
+  .then((res) => {
+   return res
+  })
+  .then(data => {
+   console.log(data)
+  })
   popupEditAvatar.close();
 });
 
@@ -145,7 +172,7 @@ popupAddPictureButton.addEventListener("click", ()=>{
 // слушатель на открытие попапа редактирования профиля
 popupEditProfileButton.addEventListener("click", () => {
   inputName.value = userInfo.getUserInfo().name;
-  inputJob.value = userInfo.getUserInfo().job;
+  inputJob.value = userInfo.getUserInfo().about;
   popupEditProfile.open();
 })
 
