@@ -50,6 +50,17 @@ api.getUserInfo()
 })
 .catch(err => {console.log(err)})
 
+const isOwner = (idCard) => {
+  api.getUserInfo()
+  .then(info => info._id)
+  .then((id) => {
+    if (id == idCard) {
+      return true
+    }
+    return false
+  })
+}
+
 
 // функция создания новой карточки
 const createNewCard = (data) => {
@@ -96,10 +107,13 @@ const popupAddCard = new PopupWithForm(".popup_add_picture", (data) => {
   // информация из импутов
   const dataForCard = {
     name: data["picture-name"],
-    link: data["picture-link"]
+    link: data["picture-link"],
   }
-  // добавляем в секцию cardList нашу готовую карточку
-  cardList.addItem(createNewCard(dataForCard));
+  api.addCard(dataForCard)
+  .then(res =>  {
+    cardList.addItem(createNewCard(res));
+  })
+  .catch(err => console.log(err))
   // закрываем попап после sumbit формы.
   popupAddCard.close();
 });
@@ -130,13 +144,12 @@ popupEditProfile.setEventListeners();
 
 // попап редактирования аватарки
 const popupEditAvatar = new PopupWithForm(".popup_change_avatar", (data) => {
-  //profileAvatar.style.backgroundImage = `url(${data["avatar-image"]})`;
   api.updateUserAvatar(data["avatar-image"])
   .then((res) => {
    return res
   })
   .then(data => {
-   console.log(data)
+    profileAvatar.style.backgroundImage = `url(${data.avatar})`;
   })
   popupEditAvatar.close();
 });

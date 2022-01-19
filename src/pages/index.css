@@ -77,6 +77,10 @@
 
 @import url(../blocks/place/__button-delete/place__button-delete.css);
 
+/*модификатор скрытия кнопки удаления*/
+
+@import url(../blocks/place/__button-delete/place__button-delete_hidden.css);
+
 /*элемент image*/
 
 @import url(../blocks/place/__image/place__image.css);
