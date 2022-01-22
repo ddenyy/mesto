@@ -5,13 +5,19 @@ export default class Section {
   }
 
 
-  addItem = (element) => {
-    this._container.append(element);
+  addItem = (element, insertMethod) => {
+    if (insertMethod == 'append') {
+      this._container.append(element);
+    }
+    else {
+      this._container.prepend(element);
+    }
   }
 
   renderCards = (cardsObject) => {
-    cardsObject.forEach(item => {
-      this._renderer(item);
+    cardsObject.array.forEach(item => {
+      const objItem = {card: item, userId: cardsObject.userId, insertMethod: cardsObject.insertMethod };
+      this._renderer(objItem);
     });
   }
 

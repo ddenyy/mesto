@@ -14,12 +14,11 @@ export default class Api {
       if (res.ok) {
         return res.json()
       }
-
       return Promise.reject(`ошибка статус ${res.status}`)
     })
   };
 
-  // другие методы работы с API
+
   getUserInfo () {
    return fetch(`${this._url}/users/me`, {
       method: 'GET',
@@ -29,10 +28,14 @@ export default class Api {
       if (res.ok) {
         return res.json()
       }
-
       return Promise.reject(`ошибка статус ${res.status}`)
     })
   };
+
+
+  renderUserAndCards() {
+    return Promise.all([this.getUserInfo(), this.getInitialCards()])
+  }
 
   updateUserInfo (info) {
    return fetch(`${this._url}/users/me`, {
@@ -40,9 +43,14 @@ export default class Api {
     headers: this._headers,
     body: JSON.stringify({
     name: info.name,
-    about: info.about
+    about: info.about})
   })
-  });
+  .then((res) => {
+    if (res.ok) {
+      return res.json()
+    }
+    return Promise.reject(`ошибка аватарки статус: ${res.status}`)
+  })
   };
 
   updateUserAvatar (avatar) {
@@ -78,11 +86,44 @@ export default class Api {
     })
   };
 
-  // deleteCard(data) {
-  //   return fetch(`${this._url}/cards/${data._id}`) {
-  //     method
-  //   }
+  deleteCard(data) {
+    return fetch(`${this._url}/cards/${data._id}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json()
+      }
+      return Promise.reject(`ошибка удаления карточки статус: ${res.status}`)
+    })
+  }
 
+  setLike(data) {
+    return fetch(`${this._url}/cards/${data._id}/likes`, {
+      method: 'PUT',
+      headers: this._headers
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json()
+      }
+      return Promise.reject(`ошибка постановки лайка карточки статус: ${res.status}`)
+    })
+  };
+
+  deleteLike(data) {
+    return fetch(`${this._url}/cards/${data._id}/likes`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json()
+      }
+      return Promise.reject(`ошибка постановки лайка карточки статус: ${res.status}`)
+    })
+  }
 
 
 };

@@ -16,6 +16,8 @@ const ButtonAcceptDelete = document.querySelector(".popup__button_delete_card")
 
 const profileAvatar = document.querySelector(".profile__image");
 
+
+
 const configError = {
   formSelector: ".form",
   inputSelector: ".popup__input",
