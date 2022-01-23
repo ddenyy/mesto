@@ -4,6 +4,7 @@ import FormValidator from "../components/FormValidator.js"
 import PopupWithImage from "../components/PopupWithImage.js"
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithConfirm from "../components/PopupWithConfirm.js";
 import UserInfo from "../components/UserInfo.js";
 import Popup from "../components/Popup.js"
 import {
@@ -17,6 +18,7 @@ import {
   profileAvatar,
   formEditAvatar,
   ButtonAcceptDelete,
+  formEditProfile
 } from "../utils/cosntants.js"
 import features from 'core-js/features';
 
@@ -39,30 +41,6 @@ api.renderUserAndCards()
 .catch(err => console.log(err))
 
 
-  // // рендер профиля
-  // api.getUserInfo()
-  // .then((info) => {
-  //  const profile = {
-  //     name: info.name,
-  //     about: info.about,
-  //     avatar: info.avatar
-  //   }
-  //   userInfo.setUserInfo(profile)
-  //   return info._id
-  // })
-  // .then((id) => {
-  // // рендер карточек
-  // api.getInitialCards()
-  // .then( data => {
-  //   const ArrayCardsWitchUserId = {
-  //     array: data,
-  //     userId: id,
-  //     insertMethod: 'append'
-  //   }
-  //   cardList.renderCards(ArrayCardsWitchUserId)
-  // })
-  // .catch((err) => {console.log(`${err} Ошибка`)})
-  // })
 
 // попапы
 
@@ -72,8 +50,31 @@ popupFullScrImg.setEventListeners();
 
 // попап удаления карточки
 // включаем слушателей на попап удаления карточек
-const popupDeleteCard = new Popup(".popup_delete_card")
+const popupDeleteCard = new PopupWithConfirm(".popup_delete_card", (element) => {
+  ButtonAcceptDelete.textContent = "Удаление..."
+    api.deleteCard(element.data)
+    .then(() => {
+      element.element.remove();
+      element.element = null;
+    })
+    .then(() => {
+      popupDeleteCard.close()
+    })
+    .catch((err) => {`ошибка удаления карточки статус: ${err}`})
+    .finally(() => {
+      ButtonAcceptDelete.textContent = "Удалить";
+    })
+});
 popupDeleteCard.setEventListeners();
+
+
+
+// колбэк открытия попапа удаления карточки
+const handleCardDelete = (element) => {
+  //открой попап
+  popupDeleteCard.open(element)
+};
+
 
 //создаем попап добавления карточек
 const popupAddCard = new PopupWithForm(".popup_add_picture", (data, submitButton) => {
@@ -87,11 +88,11 @@ const popupAddCard = new PopupWithForm(".popup_add_picture", (data, submitButton
   api.addCard(dataForCard)
   .then(res =>  {
     cardList.addItem(createNewCard(res));
+    // закрываем попап после sumbit формы.
+    popupAddCard.close();
   })
   .catch(err => console.log(err))
-  .finally(() => {submitButton.textContent = "Сохраненить."})
-  // закрываем попап после sumbit формы.
-  popupAddCard.close();
+  .finally(() => {submitButton.textContent = "Сохранить."})
 });
 // ставим слушателей на попап добавления карточки
 popupAddCard.setEventListeners();
@@ -103,16 +104,12 @@ const popupEditProfile = new PopupWithForm(".popup_edit_profile", (data, submitB
   // обработка через api
   submitButton.textContent = "Сохранение..."
   api.updateUserInfo(dataProfile)
-   .then((res) => {
-     return res.json()
-   })
    .then((data) => {
     userInfo.setUserInfo(data);
-    console.log(data)
    })
+   .then(() => popupEditProfile.close())
    .catch(err => console.log(err.status))
    .finally(() => {submitButton.textContent = "Сохранить"})
-  popupEditProfile.close();
 });
 popupEditProfile.setEventListeners();
 
@@ -122,10 +119,11 @@ const popupEditAvatar = new PopupWithForm(".popup_change_avatar", (data, submitB
   api.updateUserAvatar(data["avatar-image"])
   .then(data => {
     profileAvatar.style.backgroundImage = `url(${data.avatar})`;
+    popupEditAvatar.close();
   })
+  .catch(err => console.log(err))
   .finally(() => {
     submitButton.textContent = "Сохранить"
-    popupEditAvatar.close();
   })
 });
 popupEditAvatar.setEventListeners()
@@ -143,24 +141,6 @@ function handleCardClick (data) {
   popupFullScrImg.open(data)
 };
 
-// колбэк открытия попапа удаления карточки
-const handleCardDelete = (element) => {
-  //открой попап
-  popupDeleteCard.open()
-  // слушатель на кнопку подтверждения удаления
-  ButtonAcceptDelete.addEventListener("click", ()=>{
-    ButtonAcceptDelete.textContent = "Удаление..."
-    api.deleteCard(element.data)
-    .then(() => {
-      element.element.remove()
-    })
-    .catch((err) => {`ошибка удаления карточки статус: ${err}`})
-    .finally(() => {
-      ButtonAcceptDelete.textContent = "Удалить"
-      popupDeleteCard.close()
-    })
-  })
-};
 
 // колбэк постановки лайка на карточку
 const handleLikeSet = (data) => {
@@ -177,6 +157,7 @@ const handleLikeDelete = (data) => {
   .then((res) => {
     data.counterlikes.textContent = res.likes.length
   })
+  .catch(err => console.log(err))
 }
 
 // класс работающий с информацией в профиле (имя и работа)
@@ -220,6 +201,8 @@ popupAddPictureButton.addEventListener("click", ()=>{
 
 // слушатель на открытие попапа редактирования профиля
 popupEditProfileButton.addEventListener("click", () => {
+  formValidators[formEditProfile.getAttribute("id")].clearErrors();
+  formValidators[formEditProfile.getAttribute("id")].enableBth();
   inputName.value = userInfo.getUserInfo().name;
   inputJob.value = userInfo.getUserInfo().about;
   popupEditProfile.open();

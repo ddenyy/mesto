@@ -9,6 +9,8 @@ const inputName = document.querySelector("#popup-edit-username");
 const inputJob = document.querySelector("#popup-edit-job");
 //форма в popupEditAvatar
 const formEditAvatar = document.querySelector("#change-avatar-form");
+// форма попапа редактирования профиля
+const formEditProfile = document.querySelector("#edit-profile-form")
 // кнопка подтверждения удаления карточки
 const ButtonAcceptDelete = document.querySelector(".popup__button_delete_card")
 
@@ -41,4 +43,5 @@ export {
   profileAvatar,
   formEditAvatar,
   ButtonAcceptDelete,
+  formEditProfile,
 };

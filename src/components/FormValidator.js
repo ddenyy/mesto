@@ -46,9 +46,6 @@ export default class FormValidator {
   }
 
   enableValidation() {
-    this._form.addEventListener("submit", (evt) =>{
-      evt.preventDefault();
-    })
     this._setEventListeners();
   }
 
@@ -70,7 +67,7 @@ export default class FormValidator {
     this._sbmtButton.disabled = true;
   }
 
-  _enableBth() {
+  enableBth() {
     this._sbmtButton.
     classList.
     remove(this._config.inactiveButtonClass)

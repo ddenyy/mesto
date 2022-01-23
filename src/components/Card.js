@@ -69,9 +69,6 @@ export default class Card {
     this._likeButton.classList.add("place__heart-button_active")
   }
 
-  _deleteLike() {
-  }
-
   _checkIsOwnerCard() {
     // undefined т.к я не передаю userId когда создаю карточку через попап добавления
     if ((this._UserID == this._data.owner._id) || (this._UserID == undefined)) {
@@ -82,6 +79,7 @@ export default class Card {
 
   _deleteElement(element){
     element.remove();
+    element = null;
   }
 
   _isLiked(){
