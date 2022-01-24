@@ -17,7 +17,7 @@ import {
   formValidators,
   profileAvatar,
   formEditAvatar,
-  ButtonAcceptDelete,
+  buttonAcceptDelete,
   formEditProfile
 } from "../utils/cosntants.js"
 import features from 'core-js/features';
@@ -51,7 +51,7 @@ popupFullScrImg.setEventListeners();
 // попап удаления карточки
 // включаем слушателей на попап удаления карточек
 const popupDeleteCard = new PopupWithConfirm(".popup_delete_card", (element) => {
-  ButtonAcceptDelete.textContent = "Удаление..."
+  buttonAcceptDelete.textContent = "Удаление..."
     api.deleteCard(element.data)
     .then(() => {
       element.element.remove();
@@ -62,7 +62,7 @@ const popupDeleteCard = new PopupWithConfirm(".popup_delete_card", (element) => 
     })
     .catch((err) => {`ошибка удаления карточки статус: ${err}`})
     .finally(() => {
-      ButtonAcceptDelete.textContent = "Удалить";
+      buttonAcceptDelete.textContent = "Удалить";
     })
 });
 popupDeleteCard.setEventListeners();

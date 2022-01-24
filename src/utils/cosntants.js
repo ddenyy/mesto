@@ -12,7 +12,7 @@ const formEditAvatar = document.querySelector("#change-avatar-form");
 // форма попапа редактирования профиля
 const formEditProfile = document.querySelector("#edit-profile-form")
 // кнопка подтверждения удаления карточки
-const ButtonAcceptDelete = document.querySelector(".popup__button_delete_card")
+const buttonAcceptDelete = document.querySelector(".popup__button_delete_card")
 
 //аватар пользователя
 
@@ -42,6 +42,6 @@ export {
   formValidators,
   profileAvatar,
   formEditAvatar,
-  ButtonAcceptDelete,
+  buttonAcceptDelete,
   formEditProfile,
 };

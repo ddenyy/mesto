@@ -9,7 +9,7 @@ export default class FormValidator {
 
   _toggleButtonState = () => {
     const isFormValid = this._form.checkValidity();
-    isFormValid ? this._enableBth() : this.disableBtn();
+    isFormValid ? this.enableBth() : this.disableBtn();
   }
 
   _hideInputError = (inputElement) => {
