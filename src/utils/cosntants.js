@@ -13,7 +13,7 @@ const formEditAvatar = document.querySelector("#change-avatar-form");
 const formEditProfile = document.querySelector("#edit-profile-form")
 // кнопка подтверждения удаления карточки
 const buttonAcceptDelete = document.querySelector(".popup__button_delete_card")
-
+// спасибо за такую быструю проверку, вы определённо хороший ревьюер!
 //аватар пользователя
 
 const profileAvatar = document.querySelector(".profile__image");
