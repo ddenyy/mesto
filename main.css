@@ -22,7 +22,7 @@
 .place__image{border-radius:10px 10px 0 0;display:block;height:282px;max-width:282px;-o-object-fit:cover;object-fit:cover;width:100%}.place__image:hover{cursor:pointer}
 .place__title{font-family:Inter,Arial,Helvetica,sans-serif;font-size:24px;font-style:normal;font-weight:900;line-height:29px;margin:0;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:863px){.place__title{max-width:140px}}@media screen and (max-width:700px){.place__title{max-width:200px}}
 .place__item{align-items:center;display:flex;flex-direction:row;justify-content:space-between;margin:21px 20px 26px 21px;max-width:246px}
-.place__heart-button{background:transparent;background-image:url(1ad06e85f169668a1f36.svg);background-position:50%;background-size:cover;border:0;box-sizing:border-box;display:block;height:19px;outline:none;width:22px}.place__heart-button:hover{cursor:pointer}
+.place__heart-button{background:transparent;background-image:url(1ad06e85f169668a1f36.svg);background-position:50%;background-size:cover;border:0;box-sizing:border-box;display:block;height:19px;outline:none;width:22px}.place__heart-button:hover{cursor:pointer;opacity:.6;transition:opacity .3s linear}
 .place__heart-quantity{color:#000;font-size:13px;font-weight:400;height:13px;line-height:16px;margin:3px auto 0;text-align:center;width:10px}
 .place__heart-button_active{background-image:url(35948469632d0421d697.svg)}
 .footer{font-family:Inter,Arial,Helvetica,sans-serif;font-style:normal}
